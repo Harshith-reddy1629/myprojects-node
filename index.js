@@ -74,3 +74,33 @@ app.get("/projects/", async (req, res) => {
 
   res.send(runQ);
 });
+
+
+app.get("/otp/generate/", async(req,res) =>{
+      try {
+        const N = Math.floor(Math.random() * 9);
+      const N1 = Math.floor(Math.random() * 9);
+      const N2 = Math.floor(Math.random() * 9);
+      const N3 = Math.floor(Math.random() * 9);
+  
+      const G = `${N}${N1}${N2}${N3}`;
+
+      res.status(200).send({GenOtp: G })
+      } catch (error) {
+        res.status(500).send({
+          resMsg:'Unable To Generate OTP'
+        })
+      }
+
+} )
+
+app.post('/otp/verify/',async (req,res)=>{
+  const {genratedOtp,otpInput} = req.body
+
+  if (otpInput === genratedOtp) {
+    res.status(200).send({verificationResponse:'Success'})
+  } else {
+   res.status(400).send({verificationResponse: 'Not Matched' })
+  }
+
+})
