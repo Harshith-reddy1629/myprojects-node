@@ -100,7 +100,7 @@ app.post('/otp/verify/',async (req,res)=>{
   if (otpInput === genratedOtp) {
     res.status(200).send({verificationResponse:'Success'})
   } else {
-   res.status(400).send({verificationResponse: 'Not Matched' })
+   res.status(401).send({verificationResponse: 'Not Matched' })
   }
 
 })
